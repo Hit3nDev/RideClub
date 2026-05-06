@@ -82,7 +82,6 @@ body { background: var(--bg); overflow-x: hidden; font-family: "Inter", sans-ser
   border-radius: 16px;
   padding: 1.4px;
   background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.04) 100%);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -732,21 +731,21 @@ footer a:hover { color: var(--green); }
 
     <!-- TAB BAR -->
     <div style="display:flex;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;margin-bottom:0;" id="how-tabs">
-      <button onclick="setStep(0)" id="htab-0" class="how-tab active-tab" style="flex:1;padding:18px 8px;background:rgba(255,255,255,0.06);border:none;border-right:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.25s;">
+      <button onclick="setStep(0)" id="htab-0" class="how-tab active-tab" style="flex:1;padding:18px 8px;background:rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.5);border-top:none;border-left:none;border-right:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.25s,border-color 0.25s;">
         <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-bottom:6px;">01</div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:white;">Create</div>
       </button>
-      <button onclick="setStep(1)" id="htab-1" class="how-tab" style="flex:1;padding:18px 8px;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.25s;">
+      <button onclick="setStep(1)" id="htab-1" class="how-tab" style="flex:1;padding:18px 8px;background:rgba(0,0,0,0);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.25s,border-color 0.25s;">
         <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-bottom:6px;">02</div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:white;">Join</div>
       </button>
-      <button onclick="setStep(2)" id="htab-2" class="how-tab" style="flex:1;padding:18px 8px;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.25s;">
+      <button onclick="setStep(2)" id="htab-2" class="how-tab" style="flex:1;padding:18px 8px;background:rgba(0,0,0,0);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.25s,border-color 0.25s;">
         <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-bottom:6px;">03</div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:white;">Ride</div>
       </button>
       <button onclick="setStep(3)" id="htab-3" class="how-tab" style="flex:1;padding:18px 8px;background:transparent;border:none;cursor:pointer;transition:background 0.25s;">
         <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-bottom:6px;">04</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:white;">Regroup</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:white;">Track</div>
       </button>
     </div>
 
@@ -908,42 +907,81 @@ footer a:hover { color: var(--green); }
             </div>
           </div>
         </div>
-        <!-- Demo: Navigation screen with distance meter -->
-        <div style="flex:1;min-width:260px;padding:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.015);">
-          <div style="width:100%;max-width:220px;">
-            <!-- Nav header -->
-            <div style="background:rgba(255,255,255,0.08);border-radius:10px 10px 0 0;padding:10px 14px;display:flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.1);border-bottom:none;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-              <div>
-                <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.4);">Next turn in</div>
-                <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:800;color:white;">600 m · Second Ave</div>
+        <!-- Demo: Phone-shaped navigation screen -->
+        <div style="flex:1;min-width:260px;padding:32px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.015);">
+          <!-- Phone shell -->
+          <div style="width:160px;background:#0a0f0d;border-radius:24px;border:1.5px solid rgba(255,255,255,0.12);overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.6);">
+            <!-- Status bar -->
+            <div style="padding:8px 14px 4px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.4);" id="nav-eta">3:21 PM</span>
+              <div style="display:flex;gap:3px;align-items:center;">
+                <div style="width:10px;height:5px;border:1px solid rgba(255,255,255,0.3);border-radius:1px;position:relative;">
+                  <div style="position:absolute;left:1px;top:1px;width:60%;height:calc(100% - 2px);background:rgba(255,255,255,0.6);border-radius:1px;"></div>
+                </div>
               </div>
             </div>
-            <!-- Map area -->
-            <div style="position:relative;height:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-bottom:none;overflow:hidden;">
-              <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15;" viewBox="0 0 220 100">
-                <path d="M0 50 Q55 35 110 50 Q165 65 220 50" stroke="white" stroke-width="3" fill="none"/>
-                <path d="M110 0 L110 100" stroke="white" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+            <!-- Nav instruction bar -->
+            <div style="background:rgba(255,255,255,0.07);margin:0 8px;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <div style="width:22px;height:22px;background:rgba(255,255,255,0.15);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </div>
+              <div>
+                <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.35);">In 600 m</div>
+                <div style="font-family:'Inter',sans-serif;font-size:9px;font-weight:700;color:white;">Turn right · Second Ave</div>
+              </div>
+            </div>
+            <!-- Map viewport (taller, portrait) -->
+            <div style="position:relative;height:200px;background:rgba(255,255,255,0.025);overflow:hidden;">
+              <!-- Road network SVG -->
+              <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 160 200" preserveAspectRatio="xMidYMid slice">
+                <!-- Background blocks -->
+                <rect x="0" y="0" width="160" height="200" fill="#08100d"/>
+                <rect x="5" y="10" width="35" height="25" rx="2" fill="rgba(255,255,255,0.025)"/>
+                <rect x="50" y="5" width="40" height="30" rx="2" fill="rgba(255,255,255,0.02)"/>
+                <rect x="105" y="10" width="50" height="25" rx="2" fill="rgba(255,255,255,0.025)"/>
+                <rect x="5" y="55" width="30" height="35" rx="2" fill="rgba(255,255,255,0.02)"/>
+                <rect x="115" y="50" width="40" height="35" rx="2" fill="rgba(255,255,255,0.02)"/>
+                <rect x="5" y="130" width="35" height="30" rx="2" fill="rgba(255,255,255,0.025)"/>
+                <rect x="50" y="125" width="45" height="35" rx="2" fill="rgba(255,255,255,0.02)"/>
+                <rect x="115" y="130" width="40" height="30" rx="2" fill="rgba(255,255,255,0.025)"/>
+                <!-- Vertical main road (route) -->
+                <rect x="68" y="0" width="24" height="200" fill="rgba(255,255,255,0.04)"/>
+                <!-- Route highlight — normal section white -->
+                <rect x="74" y="100" width="12" height="100" fill="rgba(255,255,255,0.18)" rx="2"/>
+                <!-- Traffic jam section — yellow/amber -->
+                <rect id="traffic-section" x="74" y="42" width="12" height="58" fill="rgba(220,160,0,0.55)" rx="2"/>
+                <!-- Dash center line -->
+                <line x1="80" y1="100" x2="80" y2="200" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="6 5"/>
+                <!-- Horizontal cross roads -->
+                <rect x="0" y="44" width="160" height="10" fill="rgba(255,255,255,0.03)"/>
+                <rect x="0" y="100" width="160" height="8" fill="rgba(255,255,255,0.03)"/>
+                <rect x="0" y="155" width="160" height="8" fill="rgba(255,255,255,0.03)"/>
               </svg>
-              <!-- My position -->
-              <div style="position:absolute;left:30%;top:42%;width:18px;height:18px;border-radius:50%;background:white;border:2px solid rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="#070b0a"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              <!-- Traffic alert label -->
+              <div id="traffic-alert" style="position:absolute;left:50%;top:26px;transform:translateX(-50%);background:rgba(180,130,0,0.85);border:1px solid rgba(220,170,0,0.7);border-radius:5px;padding:3px 8px;font-family:'Inter',sans-serif;font-size:7px;font-weight:700;color:rgba(255,230,100,1);white-space:nowrap;transition:opacity 0.5s;">⚠ Traffic ahead</div>
+              <!-- My position (moving up the road) -->
+              <div id="nav-me" style="position:absolute;left:50%;top:72%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:white;border:2px solid rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;transition:top 1s ease;z-index:5;">
+                <!-- No arrow — just white dot -->
               </div>
-              <!-- Group riders on map -->
-              <div id="nav-r1" style="position:absolute;left:52%;top:36%;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:7px;font-weight:800;color:white;transition:left 0.8s ease;">A</div>
-              <div id="nav-r2" style="position:absolute;left:66%;top:44%;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:7px;font-weight:800;color:white;transition:left 0.8s ease 0.2s;">K</div>
-              <!-- Traffic alert -->
-              <div id="traffic-alert" style="position:absolute;right:6px;top:6px;background:rgba(200,150,0,0.3);border:1px solid rgba(200,150,0,0.5);border-radius:5px;padding:3px 7px;font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,200,0,0.9);transition:opacity 0.4s;">⚠ Traffic ahead</div>
+              <!-- Group riders (moving upward too, ahead of me) -->
+              <div id="nav-r1" style="position:absolute;left:50%;top:45%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:6px;font-weight:800;color:white;transition:top 1s ease 0.15s;z-index:4;">A</div>
+              <div id="nav-r2" style="position:absolute;left:50%;top:52%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,0.13);border:1.5px solid rgba(255,255,255,0.55);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:6px;font-weight:800;color:white;transition:top 1s ease 0.3s;z-index:4;">K</div>
+              <!-- Destination pin -->
+              <div style="position:absolute;left:50%;top:8%;transform:translateX(-50%);font-size:12px;z-index:3;">📍</div>
             </div>
-            <!-- Bottom bar -->
-            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:0 0 10px 10px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
+            <!-- Bottom info bar -->
+            <div style="padding:10px 12px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);">
               <div>
-                <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);">ETA</div>
-                <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:800;color:white;" id="nav-eta">3:21 PM</div>
+                <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.3);">ETA</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:800;color:white;">3:21 PM</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.3);">RIDERS</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:800;color:white;">3 live</div>
               </div>
               <div style="text-align:right;">
-                <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);">Distance</div>
-                <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:800;color:white;">1.7 km</div>
+                <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.3);">DIST</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:800;color:white;">1.7 km</div>
               </div>
             </div>
           </div>
@@ -1003,26 +1041,20 @@ footer a:hover { color: var(--green); }
                 </div>
                 <span style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);" id="fc3-status">Stopped</span>
               </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#888;opacity:0.7;"></div>
+                  <span style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.7);">Jai</span>
+                </div>
+                <span style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);">Left behind</span>
+              </div>
             </div>
             <!-- SOS button -->
             <div style="background:rgba(180,30,30,0.15);border:1px solid rgba(220,60,60,0.3);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;" id="sos-btn" onclick="this.style.background='rgba(200,40,40,0.3)';setTimeout(()=>this.style.background='rgba(180,30,30,0.15)',800)">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,100,100,0.9)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               <span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:rgba(255,100,100,0.9);letter-spacing:0.08em;">SOS — Emergency Alert</span>
             </div>
-            <!-- Converging dots -->
-            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 14px;position:relative;height:60px;overflow:hidden;">
-              <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;margin-bottom:4px;">REGROUPING</div>
-              <div id="conv1" style="position:absolute;left:8%;top:35%;transition:left 1.4s cubic-bezier(0.4,0,0.2,1),top 1.4s cubic-bezier(0.4,0,0.2,1);">
-                <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:8px;font-weight:800;color:white;">R</div>
-              </div>
-              <div id="conv2" style="position:absolute;left:75%;top:20%;transition:left 1.4s cubic-bezier(0.4,0,0.2,1) 0.15s,top 1.4s cubic-bezier(0.4,0,0.2,1) 0.15s;">
-                <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:8px;font-weight:800;color:white;">A</div>
-              </div>
-              <div id="conv3" style="position:absolute;left:55%;top:55%;transition:left 1.4s cubic-bezier(0.4,0,0.2,1) 0.3s,top 1.4s cubic-bezier(0.4,0,0.2,1) 0.3s;">
-                <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:8px;font-weight:800;color:white;">K</div>
-              </div>
-              <div style="position:absolute;left:38%;top:40%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);z-index:2;"></div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -1482,11 +1514,11 @@ setInterval(function() {
 var mapStarted = false;
 
 var riders = [
-  { name: "Rahul",  emoji: "R", left: 6,  top: 31, stopMs: null  },
-  { name: "Arjun",  emoji: "A", left: 20, top: 33, stopMs: null  },
-  { name: "Vikram", emoji: "V", left: 36, top: 31, stopMs: 14000 },
-  { name: "Kabir",  emoji: "K", left: 54, top: 32, stopMs: null  },
-  { name: "Dev",    emoji: "D", left: 70, top: 30, stopMs: null  }
+  { name: "Rahul",  emoji: "R", left: 6,  top: 28.1, stopMs: null  },
+  { name: "Arjun",  emoji: "A", left: 20, top: 27.2, stopMs: null  },
+  { name: "Vikram", emoji: "V", left: 36, top: 30.2, stopMs: 14000 },
+  { name: "Kabir",  emoji: "K", left: 54, top: 31.5, stopMs: null  },
+  { name: "Dev",    emoji: "D", left: 70, top: 28.1, stopMs: null  }
 ];
 
 var avatarEls   = [];
@@ -1528,18 +1560,40 @@ function showJoinNotif(name) {
 function startMapMoving() {
   var msb = document.getElementById("map-status-bar");
   if (msb) msb.textContent = "5 riders moving \u2022 group ride active";
-  // All riders travel left→right along road (top ~31%)
+
+  // Precomputed lookup table: for each x% (0–100 step 5),
+  // the correct avatar top% to centre the 36px circle ON the bezier road.
+  // Road SVG: M0 130 Q150 112 300 130 Q450 148 600 128 Q720 112 900 132 (viewBox 900x380)
+  // top% = roadY_svg / 380 * 100 - (18px / 380px * 100) where 18px = half circle radius
+  var roadLUT = [
+    [0,29.5],[5,28.3],[10,27.5],[15,27.2],[20,27.2],
+    [25,27.7],[30,28.7],[35,30.0],[40,31.0],[45,31.6],
+    [50,31.8],[55,31.4],[60,30.7],[65,29.5],[70,28.1],
+    [75,27.3],[80,27.1],[85,27.3],[90,27.9],[95,28.9],[100,30.0]
+  ];
+
+  function roadYAt(xPct) {
+    xPct = Math.max(0, Math.min(100, xPct));
+    var lo = Math.floor(xPct / 5) * 5;
+    var hi = Math.min(100, lo + 5);
+    var t  = (xPct - lo) / 5;
+    var yLo = 28.1, yHi = 28.1;
+    for (var k = 0; k < roadLUT.length; k++) {
+      if (roadLUT[k][0] === lo) yLo = roadLUT[k][1];
+      if (roadLUT[k][0] === hi) yHi = roadLUT[k][1];
+    }
+    return yLo + (yHi - yLo) * t;
+  }
+
   avatarEls.forEach(function(av, i) {
     if (riders[i].stopMs !== null) return;
     var posL = riders[i].left;
-    var roadY = 31;
-    var lane  = (i % 2 === 0) ? 1.2 : -1.2;
     var iv = setInterval(function() {
-      posL += 0.14;
-      if (posL > 92) posL = 4 + i * 3;
-      var newT = roadY + Math.sin(posL * 0.045 + i * 0.6) * 1.6 + lane;
+      posL += 0.13;
+      if (posL > 92) posL = 4 + (i * 2.5);
+      var roadY = roadYAt(posL);
       av.style.left = posL + "%";
-      av.style.top  = newT + "%";
+      av.style.top  = roadY + "%";
     }, 80);
     mapMoveIvs.push(iv);
   });
@@ -1589,11 +1643,11 @@ function startMapSequence() {
         setTimeout(function() {
           startMapMoving();
           var poolNotifs = [
-            { text: "\u26FD Petrol Pump 2 km ahead", ri: 3, dL: 10,   dT: -50 },
-            { text: "\uD83D\uDCCD Rahul is 3 km from you", ri: 0, dL: -10,  dT: 45  },
-            { text: "\uD83C\uDF7D Food Outlet nearby",    ri: 4, dL: -100, dT: -45 },
-            { text: "\u26A0 Vikram has stopped",           ri: 2, dL: 12,   dT: 48  },
-            { text: "\uD83D\uDCCE Arjun is 1.8 km behind", ri: 1, dL: 8,    dT: -50 }
+            { text: "\u26FD Petrol Pump 2 km ahead",      ri: 4, dL: 4, dT: -52 },
+            { text: "\uD83D\uDCCE Kabir is 1.5 km ahead", ri: 3, dL: 4, dT: -52 },
+            { text: "\uD83C\uDF7D Food Outlet nearby",    ri: 4, dL: 4, dT: -52 },
+            { text: "\u26A0 Vikram has stopped",           ri: 2, dL: 4, dT:  40 },
+            { text: "\uD83D\uDCCE Arjun is 1.8 km behind", ri: 1, dL: 4, dT: -52 }
           ];
           var pIdx = 0;
           function nextPoolNotif() {
@@ -1650,7 +1704,12 @@ function setStep(n) {
     var tab   = document.getElementById("htab-" + i);
     var panel = document.getElementById("hpanel-" + i);
     var dot   = document.querySelectorAll(".how-prog-dot")[i];
-    if (tab)   { tab.style.background = i === n ? "rgba(255,255,255,0.08)" : "transparent"; }
+    if (tab) {
+      // explicitly override the inline background so Create doesn't stay highlighted
+      tab.style.cssText = tab.style.cssText; // no-op to ensure inline takes effect
+      tab.style.background = i === n ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0)";
+      tab.style.borderBottom = i === n ? "2px solid rgba(255,255,255,0.5)" : "2px solid transparent";
+    }
     if (panel) { panel.style.display  = i === n ? "flex" : "none"; }
     if (dot)   { dot.style.width = i === n ? "20px" : "8px"; dot.style.background = i === n ? "white" : "rgba(255,255,255,0.2)"; }
   }
@@ -1703,50 +1762,37 @@ function runStepDemo(n) {
       }, i * 700 + 300);
     });
   }
-  // Step 2: animate nav riders drifting
+  // Step 2: riders move upward (toward destination) on phone nav screen
   if (n === 2) {
+    var me = document.getElementById("nav-me");
     var r1 = document.getElementById("nav-r1");
     var r2 = document.getElementById("nav-r2");
     var ta = document.getElementById("traffic-alert");
+    // Positions cycle: riders ahead of "me", all moving upward (lower top% = higher on screen)
+    // All riders on road centreline (left fixed at 50%), moving upward (decreasing top%)
     var positions = [
-      { r1: "52%", r2: "66%", traffic: "1" },
-      { r1: "40%", r2: "55%", traffic: "0" },
-      { r1: "58%", r2: "72%", traffic: "1" },
-      { r1: "45%", r2: "60%", traffic: "0" }
+      { me: "72%", r1: "50%", r2: "58%", traffic: "1" },
+      { me: "64%", r1: "42%", r2: "50%", traffic: "1" },
+      { me: "56%", r1: "34%", r2: "42%", traffic: "0" },
+      { me: "48%", r1: "25%", r2: "34%", traffic: "0" },
+      { me: "72%", r1: "50%", r2: "58%", traffic: "1" }  // loop back
     ];
     var pi = 0;
     if (window._navTimer) clearInterval(window._navTimer);
     function cycleNav() {
-      if (r1) r1.style.left = positions[pi].r1;
-      if (r2) r2.style.left = positions[pi].r2;
+      if (me) me.style.top = positions[pi].me;
+      if (r1) r1.style.top = positions[pi].r1;
+      if (r2) r2.style.top = positions[pi].r2;
       if (ta) ta.style.opacity = positions[pi].traffic;
       pi = (pi + 1) % positions.length;
     }
     cycleNav();
-    window._navTimer = setInterval(cycleNav, 1800);
+    window._navTimer = setInterval(cycleNav, 1600);
   }
-  // Step 3: Converge animation
+  // Step 3: Animate rider status cycling (Vikram + Jai)
   if (n === 3) {
-    var convIds = ["conv1", "conv2", "conv3"];
-    var expanded  = [{ left:"8%",  top:"35%" }, { left:"75%", top:"20%" }, { left:"55%", top:"55%" }];
-    var converged = [{ left:"33%", top:"40%" }, { left:"40%", top:"38%" }, { left:"36%", top:"43%" }];
-    var toggled = false;
     if (window._convTimer) clearInterval(window._convTimer);
-    function doConverge() {
-      toggled = !toggled;
-      convIds.forEach(function(id, i) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        var pos = toggled ? converged[i] : expanded[i];
-        el.style.left = pos.left; el.style.top = pos.top;
-      });
-    }
-    convIds.forEach(function(id, i) {
-      var el = document.getElementById(id);
-      if (el) { el.style.left = expanded[i].left; el.style.top = expanded[i].top; }
-    });
-    setTimeout(doConverge, 400);
-    window._convTimer = setInterval(doConverge, 2400);
+    // fc3-dot and fc3-status already animated globally, nothing extra needed
   }
 }
 
@@ -1759,7 +1805,7 @@ function runStepDemo(n) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         if (!inited) { inited = true; runStepDemo(0); }
-        if (!howAutoTimer) howAutoTimer = setInterval(function() { setStep((currentStep + 1) % 4); }, 5000);
+        if (!howAutoTimer) howAutoTimer = setInterval(function() { setStep((currentStep + 1) % 4); }, 8000);
       } else {
         if (howAutoTimer) { clearInterval(howAutoTimer); howAutoTimer = null; }
         if (window._navTimer)      { clearInterval(window._navTimer);      window._navTimer      = null; }
