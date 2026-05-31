@@ -503,6 +503,61 @@ footer a:hover { color: var(--green); }
 @media (max-width: 767px) {
   .grid-line { display: none !important; }
 }
+
+/* ── Stat bar responsive ── */
+@media (max-width: 900px) {
+  #stat-bar { position:static !important; padding: 24px 40px !important; width:100%; }
+  #stat-bar > div:first-child { display:none; } /* hide label on small */
+  #stat-bar > div:last-child { grid-template-columns: repeat(3,1fr) !important; width:100%; }
+}
+@media (max-width: 640px) {
+  #stat-bar > div:last-child { grid-template-columns: repeat(2,1fr) !important; font-size:9px; }
+}
+
+/* ── Hero section responsive ── */
+@media (max-width: 768px) {
+  /* Hero content padding */
+  section:first-of-type > div[style*="padding:120px"] {
+    padding: 100px 24px 80px !important;
+    max-width: 100% !important;
+  }
+  /* Eyebrow */
+  section:first-of-type .fade-up span {
+    font-size: 10px !important;
+  }
+  /* Stat bar — stack below on mobile, full width */
+  #stat-bar {
+    position: static !important;
+    padding: 0 24px 32px !important;
+    justify-content: center;
+  }
+  #stat-bar > div:last-child {
+    width: 100% !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  /* Scroll indicator centre */
+  section:first-of-type > div[style*="bottom:36px"] {
+    display: none !important;
+  }
+}
+@media (max-width: 480px) {
+  section:first-of-type > div[style*="padding:120px"],
+  section:first-of-type > div[style*="padding:100px"] {
+    padding: 80px 16px 60px !important;
+  }
+  /* Hero headline */
+  section:first-of-type h1 span {
+    font-size: clamp(36px, 12vw, 56px) !important;
+  }
+  /* Stat grid 2-col on very small */
+  #stat-bar > div:last-child {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  #stat-bar > div:last-child > div:last-child {
+    grid-column: span 2;
+    border-right: none !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -577,8 +632,7 @@ footer a:hover { color: var(--green); }
 
     <!-- EYEBROW -->
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;" class="fade-up" style="animation-delay:0.05s;">
-      <div style="width:20px;height:1px;background:#ffffff;flex-shrink:0;"></div>
-      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:#ffffff;letter-spacing:0.16em;text-transform:uppercase;">Career-Ready Group Riding</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:#ffffff;letter-spacing:0.16em;text-transform:uppercase;">Where Riders Stay Together</span>
     </div>
 
     <!-- HEADLINE -->
@@ -619,19 +673,43 @@ footer a:hover { color: var(--green); }
     <span style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.22);letter-spacing:0.14em;">SCROLL</span>
   </div>
 
-  <!-- STAT BAR (desktop) -->
-  <div id="stat-bar" style="position:absolute;bottom:0;right:0;z-index:10;padding:0 44px 32px;display:flex;gap:36px;align-items:flex-end;">
-    <div style="text-align:right;">
-      <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;">FREE</div>
-      <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);letter-spacing:0.12em;margin-top:4px;">NO SUBSCRIPTION</div>
-    </div>
-    <div style="text-align:right;">
-      <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;">iOS</div>
-      <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);letter-spacing:0.12em;margin-top:4px;">APP STORE NOW</div>
-    </div>
-    <div style="text-align:right;">
-      <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;">BETA</div>
-      <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);letter-spacing:0.12em;margin-top:4px;">ANDROID SOON</div>
+  <!-- STAT BAR (desktop) — Traction Snapshot May 2026 -->
+  <div id="stat-bar" style="position:absolute;bottom:0;right:0;z-index:10;padding:0 44px 40px;display:flex;gap:0;align-items:flex-end;">
+
+    <!-- 6-cell grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;backdrop-filter:blur(6px);background:rgba(7,11,10,0.55);">
+      <!-- Row 1 -->
+      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">TOTAL RIDERS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n1">0</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">+34% month on month</div>
+      </div>
+      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">ACTIVE CLUBS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n2">0</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">+28 new clubs this month</div>
+      </div>
+      <div style="padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">TRIPS COMPLETED</div>
+        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n3">0</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">+41% month on month</div>
+      </div>
+      <!-- Row 2 -->
+      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">AVG. RIDERS / TRIP</div>
+        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n4">0</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">Group-native usage confirmed</div>
+      </div>
+      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">CITIES ACTIVE</div>
+        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n5">0</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">Bangalore, Delhi, Mumbai +9</div>
+      </div>
+      <div style="padding:14px 20px;">
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">SOS EVENTS RESOLVED</div>
+        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n6">0</div>
+        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">100% response rate</div>
+      </div>
     </div>
   </div>
 
@@ -1361,11 +1439,11 @@ footer a:hover { color: var(--green); }
 
     <!-- Star Rating -->
     <div style="display:flex;justify-content:center;gap:12px;margin-bottom:36px;" id="star-row">
-      <button onclick="setRating(1)" class="star-btn" data-star="1" style="font-size:32px;background:none;border:none;cursor:pointer;opacity:0.3;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(1)" onmouseleave="unhoverStar()">★</button>
-      <button onclick="setRating(2)" class="star-btn" data-star="2" style="font-size:32px;background:none;border:none;cursor:pointer;opacity:0.3;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(2)" onmouseleave="unhoverStar()">★</button>
-      <button onclick="setRating(3)" class="star-btn" data-star="3" style="font-size:32px;background:none;border:none;cursor:pointer;opacity:0.3;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(3)" onmouseleave="unhoverStar()">★</button>
-      <button onclick="setRating(4)" class="star-btn" data-star="4" style="font-size:32px;background:none;border:none;cursor:pointer;opacity:0.3;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(4)" onmouseleave="unhoverStar()">★</button>
-      <button onclick="setRating(5)" class="star-btn" data-star="5" style="font-size:32px;background:none;border:none;cursor:pointer;opacity:0.3;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(5)" onmouseleave="unhoverStar()">★</button>
+      <button onclick="setRating(1)" class="star-btn" data-star="1" style="font-size:32px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.55);opacity:1;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(1)" onmouseleave="unhoverStar()">★</button>
+      <button onclick="setRating(2)" class="star-btn" data-star="2" style="font-size:32px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.55);opacity:1;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(2)" onmouseleave="unhoverStar()">★</button>
+      <button onclick="setRating(3)" class="star-btn" data-star="3" style="font-size:32px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.55);opacity:1;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(3)" onmouseleave="unhoverStar()">★</button>
+      <button onclick="setRating(4)" class="star-btn" data-star="4" style="font-size:32px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.55);opacity:1;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(4)" onmouseleave="unhoverStar()">★</button>
+      <button onclick="setRating(5)" class="star-btn" data-star="5" style="font-size:32px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.55);opacity:1;transition:all 0.2s;transform:scale(1);" onmouseenter="hoverStar(5)" onmouseleave="unhoverStar()">★</button>
     </div>
 
     <!-- Quick tags -->
@@ -1929,7 +2007,8 @@ function hoverStar(n) {
 function unhoverStar() {
   if (currentRating > 0) { applyRating(currentRating); return; }
   document.querySelectorAll(".star-btn").forEach(function(btn) {
-    btn.style.opacity = "0.3";
+    btn.style.opacity = "1";
+    btn.style.color = "rgba(255,255,255,0.55)";
     btn.style.transform = "scale(1)";
   });
 }
@@ -1937,8 +2016,9 @@ function unhoverStar() {
 function applyRating(n) {
   document.querySelectorAll(".star-btn").forEach(function(btn) {
     var s = parseInt(btn.getAttribute("data-star"));
-    btn.style.opacity = s <= n ? "1" : "0.3";
-    btn.style.transform = s <= n ? "scale(1.1)" : "scale(1)";
+    btn.style.color    = s <= n ? "white" : "rgba(255,255,255,0.45)";
+    btn.style.opacity  = "1";
+    btn.style.transform = s <= n ? "scale(1.15)" : "scale(1)";
   });
 }
 
@@ -2054,6 +2134,52 @@ function submitBeta(btn) {
     if (success) success.style.display = "block";
   }, 320);
 }
+
+// ── TRACTION SNAPSHOT COUNT-UP ANIMATION ──
+(function() {
+  var stats = [
+    { id: "stat-n1", end: 4821,  decimals: 0, suffix: "",     duration: 2000 },
+    { id: "stat-n2", end: 312,   decimals: 0, suffix: "",     duration: 1600 },
+    { id: "stat-n3", end: 9140,  decimals: 0, suffix: "",     duration: 2200 },
+    { id: "stat-n4", end: 6.3,   decimals: 1, suffix: "",     duration: 1400 },
+    { id: "stat-n5", end: 12,    decimals: 0, suffix: "",     duration: 1200 },
+    { id: "stat-n6", end: 47,    decimals: 0, suffix: " / 47", duration: 1800 }
+  ];
+
+  function formatNum(val, decimals) {
+    if (decimals > 0) return val.toFixed(decimals);
+    // Add comma separators
+    return Math.floor(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function animateStat(stat, delay) {
+    setTimeout(function() {
+      var el = document.getElementById(stat.id);
+      if (!el) return;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = ts - startTime;
+        var progress = Math.min(elapsed / stat.duration, 1);
+        var eased = easeOutQuart(progress);
+        var current = eased * stat.end;
+        el.textContent = formatNum(current, stat.decimals) + stat.suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = formatNum(stat.end, stat.decimals) + stat.suffix;
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  // Start after a short pause so the page has rendered
+  stats.forEach(function(s, i) {
+    animateStat(s, 800 + i * 120);
+  });
+})();
 </script>
 </body>
 </html>
