@@ -558,6 +558,37 @@ footer a:hover { color: var(--green); }
     border-right: none !important;
   }
 }
+
+/* ── App Simulation Section ── */
+.speed-btn.active-speed {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.5) !important;
+  color: white !important;
+}
+.speed-btn:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.3) !important;
+  color: white !important;
+}
+#app-sim-video:hover ~ #app-sim-overlay,
+#app-sim-overlay:hover { opacity: 1 !important; }
+
+@media (max-width: 768px) {
+  #app-simulation { padding: 70px 24px !important; }
+  #app-simulation > div > div:last-child { flex-direction: column; align-items: center; gap: 24px; }
+  /* Speed buttons go below phone on mobile */
+  #app-simulation .section-reveal > div > div[style*="right:-88px"] {
+    position: static !important;
+    transform: none !important;
+    flex-direction: row !important;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 8px !important;
+  }
+}
+@media (max-width: 480px) {
+  #app-simulation > div > div:last-child > div > div:first-child { width: 260px !important; }
+}
 </style>
 </head>
 <body>
@@ -1281,6 +1312,78 @@ footer a:hover { color: var(--green); }
         <div id="rider-count-badge" style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:0.08em;border:1px solid rgba(255,255,255,0.12);border-radius:9999px;padding:3px 10px;opacity:0;transition:opacity 0.5s;">0 riders</div>
       </div>
     </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ APP SIMULATION SECTION ═══════════ -->
+<section id="app-simulation" style="background:#070b0a;padding:100px 40px;border-top:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.025) 0%,transparent 60%);pointer-events:none;"></div>
+
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <!-- Section header -->
+    <div class="section-reveal" style="margin-bottom:52px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <div style="width:20px;height:1px;background:#ffffff;"></div>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:#ffffff;letter-spacing:0.16em;">APP IN ACTION</span>
+      </div>
+      <h2 style="font-family:'Inter',sans-serif;font-size:clamp(28px,4vw,50px);font-weight:900;color:white;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;">
+        SEE IT<br/><em style="font-family:'Instrument Serif',serif;font-style:italic;text-transform:none;color:white;font-weight:400;">Live.</em>
+      </h2>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,0.5);max-width:480px;line-height:1.78;margin-top:14px;">
+        Watch MotoClub in real action — live group navigation, rider tracking, and trip management all on one screen.
+      </p>
+    </div>
+
+    <!-- Phone frame + video -->
+    <div class="section-reveal reveal-scale" style="display:flex;justify-content:center;align-items:center;">
+      <div style="position:relative;">
+
+        <!-- Phone shell -->
+        <div style="width:300px;background:#0a0f0d;border-radius:40px;border:2px solid rgba(255,255,255,0.12);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.04);position:relative;">
+
+          <!-- Notch bar -->
+          <div style="height:28px;background:#0a0f0d;display:flex;align-items:center;justify-content:center;">
+            <div style="width:80px;height:8px;background:rgba(255,255,255,0.08);border-radius:4px;"></div>
+          </div>
+
+          <!-- Video -->
+          <div style="position:relative;background:#000;overflow:hidden;">
+            <video id="app-sim-video"
+              src="https://res.cloudinary.com/dajekho84/video/upload/v1780329496/ActiveTripNavigation_online-video-cutter.com_ff0svg.mp4"
+              autoplay muted loop playsinline
+              style="width:100%;display:block;max-height:580px;object-fit:cover;">
+            </video>
+
+            <!-- Play/Pause tap overlay -->
+            <div id="app-sim-overlay" onclick="toggleAppSimPlay()" style="position:absolute;inset:0;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.25s;background:rgba(0,0,0,0.3);">
+              <div id="app-sim-play-icon" style="width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);">
+                <svg id="app-sim-svg-play" width="18" height="18" viewBox="0 0 24 24" fill="white" style="margin-left:2px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg id="app-sim-svg-pause" width="18" height="18" viewBox="0 0 24 24" fill="white" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Home bar -->
+          <div style="height:24px;background:#0a0f0d;display:flex;align-items:center;justify-content:center;">
+            <div style="width:100px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;"></div>
+          </div>
+        </div>
+
+        <!-- Speed controls — floated to right of phone -->
+        <div style="position:absolute;top:50%;right:-88px;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
+          <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.12em;margin-bottom:2px;">SPEED</div>
+          <button onclick="setAppSimSpeed(1)"   id="speed-1x"   class="speed-btn active-speed" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:white;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);border-radius:7px;padding:7px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;width:70px;text-align:center;">1×</button>
+          <button onclick="setAppSimSpeed(1.25)" id="speed-1-25x" class="speed-btn" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:7px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;width:70px;text-align:center;">1.25×</button>
+          <button onclick="setAppSimSpeed(1.5)" id="speed-1-5x"  class="speed-btn" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:7px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;width:70px;text-align:center;">1.5×</button>
+          <button onclick="setAppSimSpeed(2)"   id="speed-2x"   class="speed-btn" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:7px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;width:70px;text-align:center;">2×</button>
+        </div>
+
+        <!-- Ambient glow behind phone -->
+        <div style="position:absolute;inset:-30px;background:radial-gradient(ellipse,rgba(255,255,255,0.04) 0%,transparent 65%);z-index:-1;pointer-events:none;border-radius:50%;"></div>
+      </div>
     </div>
 
   </div>
@@ -2179,6 +2282,56 @@ function submitBeta(btn) {
   stats.forEach(function(s, i) {
     animateStat(s, 800 + i * 120);
   });
+})();
+
+// ── APP SIMULATION VIDEO CONTROLS ──
+function setAppSimSpeed(rate) {
+  var vid = document.getElementById("app-sim-video");
+  if (vid) vid.playbackRate = rate;
+
+  // Update button styles
+  var ids = { 1: "speed-1x", 1.25: "speed-1-25x", 1.5: "speed-1-5x", 2: "speed-2x" };
+  Object.keys(ids).forEach(function(r) {
+    var btn = document.getElementById(ids[r]);
+    if (!btn) return;
+    if (parseFloat(r) === rate) {
+      btn.classList.add("active-speed");
+    } else {
+      btn.classList.remove("active-speed");
+      btn.style.color = "rgba(255,255,255,0.45)";
+      btn.style.background = "transparent";
+      btn.style.borderColor = "rgba(255,255,255,0.1)";
+    }
+  });
+}
+
+function toggleAppSimPlay() {
+  var vid = document.getElementById("app-sim-video");
+  var overlay = document.getElementById("app-sim-overlay");
+  var iconPlay  = document.getElementById("app-sim-svg-play");
+  var iconPause = document.getElementById("app-sim-svg-pause");
+  if (!vid) return;
+  if (vid.paused) {
+    vid.play();
+    if (iconPlay)  iconPlay.style.display  = "none";
+    if (iconPause) iconPause.style.display = "block";
+    // Hide overlay after 1.2s when playing
+    setTimeout(function() { if (overlay && !vid.paused) overlay.style.opacity = "0"; }, 1200);
+  } else {
+    vid.pause();
+    if (iconPlay)  iconPlay.style.display  = "block";
+    if (iconPause) iconPause.style.display = "none";
+    if (overlay) overlay.style.opacity = "1";
+  }
+}
+
+// Show overlay on hover
+(function() {
+  var vid = document.getElementById("app-sim-video");
+  var overlay = document.getElementById("app-sim-overlay");
+  if (!vid || !overlay) return;
+  vid.addEventListener("mouseenter", function() { overlay.style.opacity = "1"; });
+  vid.addEventListener("mouseleave", function() { if (!vid.paused) overlay.style.opacity = "0"; });
 })();
 </script>
 </body>
