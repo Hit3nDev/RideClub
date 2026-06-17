@@ -508,10 +508,10 @@ footer a:hover { color: var(--green); }
 @media (max-width: 900px) {
   #stat-bar { position:static !important; padding: 24px 40px !important; width:100%; }
   #stat-bar > div:first-child { display:none; } /* hide label on small */
-  #stat-bar > div:last-child { grid-template-columns: repeat(3,1fr) !important; width:100%; }
+  #stat-bar > div:last-child { grid-template-columns: repeat(6,1fr) !important; width:100%; }
 }
 @media (max-width: 640px) {
-  #stat-bar > div:last-child { grid-template-columns: repeat(2,1fr) !important; font-size:9px; }
+  #stat-bar > div:last-child { grid-template-columns: repeat(6,1fr) !important; font-size:9px; }
 }
 
 /* ── Hero section responsive ── */
@@ -533,7 +533,7 @@ footer a:hover { color: var(--green); }
   }
   #stat-bar > div:last-child {
     width: 100% !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(6, 1fr) !important;
   }
   /* Scroll indicator centre */
   section:first-of-type > div[style*="bottom:36px"] {
@@ -549,14 +549,7 @@ footer a:hover { color: var(--green); }
   section:first-of-type h1 span {
     font-size: clamp(36px, 12vw, 56px) !important;
   }
-  /* Stat grid 2-col on very small */
-  #stat-bar > div:last-child {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  #stat-bar > div:last-child > div:last-child {
-    grid-column: span 2;
-    border-right: none !important;
-  }
+  /* Stat grid keeps its 2-then-3 row structure (baked into base grid spans) */
 }
 
 /* ── App Simulation Section ── */
@@ -707,39 +700,29 @@ footer a:hover { color: var(--green); }
   <!-- STAT BAR (desktop) — Traction Snapshot May 2026 -->
   <div id="stat-bar" style="position:absolute;bottom:0;right:0;z-index:10;padding:0 44px 40px;display:flex;gap:0;align-items:flex-end;">
 
-    <!-- 6-cell grid -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;backdrop-filter:blur(6px);background:rgba(7,11,10,0.55);">
+    <!-- 5-cell grid: row 1 = 2 cells, row 2 = 3 cells -->
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;backdrop-filter:blur(6px);background:rgba(7,11,10,0.55);">
       <!-- Row 1 -->
-      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">TOTAL RIDERS</div>
-        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n1">0</div>
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">+34% month on month</div>
+      <div style="grid-column:span 3;padding:18px 26px;border-right:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:6px;">TOTAL USERS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:28px;font-weight:900;color:white;line-height:1;" id="stat-n1">0</div>
       </div>
-      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">ACTIVE CLUBS</div>
-        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n2">0</div>
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">+28 new clubs this month</div>
-      </div>
-      <div style="padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.07);">
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">TRIPS COMPLETED</div>
-        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n3">0</div>
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">+41% month on month</div>
+      <div style="grid-column:span 3;padding:18px 26px;border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:6px;">COMPLETED TRIPS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:28px;font-weight:900;color:white;line-height:1;" id="stat-n5">0</div>
       </div>
       <!-- Row 2 -->
-      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);">
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">AVG. RIDERS / TRIP</div>
-        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n4">0</div>
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">Group-native usage confirmed</div>
+      <div style="grid-column:span 2;padding:18px 26px;border-right:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:6px;">TOTAL GROUPS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:28px;font-weight:900;color:white;line-height:1;" id="stat-n2">0</div>
       </div>
-      <div style="padding:14px 20px;border-right:1px solid rgba(255,255,255,0.07);">
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">CITIES ACTIVE</div>
-        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n5">0</div>
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">Bangalore, Delhi, Mumbai +9</div>
+      <div style="grid-column:span 2;padding:18px 26px;border-right:1px solid rgba(255,255,255,0.07);">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:6px;">TOTAL TRIPS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:28px;font-weight:900;color:white;line-height:1;" id="stat-n3">0</div>
       </div>
-      <div style="padding:14px 20px;">
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:5px;">SOS EVENTS RESOLVED</div>
-        <div style="font-family:'Inter',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1;" id="stat-n6">0</div>
-        <div style="font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.28);margin-top:4px;">100% response rate</div>
+      <div style="grid-column:span 2;padding:18px 26px;">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-bottom:6px;">ACTIVE GROUPS</div>
+        <div style="font-family:'Inter',sans-serif;font-size:28px;font-weight:900;color:white;line-height:1;" id="stat-n4">0</div>
       </div>
     </div>
   </div>
@@ -2241,12 +2224,11 @@ function submitBeta(btn) {
 // ── TRACTION SNAPSHOT COUNT-UP ANIMATION ──
 (function() {
   var stats = [
-    { id: "stat-n1", end: 4821,  decimals: 0, suffix: "",     duration: 2000 },
-    { id: "stat-n2", end: 312,   decimals: 0, suffix: "",     duration: 1600 },
-    { id: "stat-n3", end: 9140,  decimals: 0, suffix: "",     duration: 2200 },
-    { id: "stat-n4", end: 6.3,   decimals: 1, suffix: "",     duration: 1400 },
-    { id: "stat-n5", end: 12,    decimals: 0, suffix: "",     duration: 1200 },
-    { id: "stat-n6", end: 47,    decimals: 0, suffix: " / 47", duration: 1800 }
+    { id: "stat-n1", end: 49, decimals: 0, suffix: "", duration: 1400 },
+    { id: "stat-n2", end: 2,  decimals: 0, suffix: "", duration: 1000 },
+    { id: "stat-n3", end: 59, decimals: 0, suffix: "", duration: 1600 },
+    { id: "stat-n4", end: 2,  decimals: 0, suffix: "", duration: 1000 },
+    { id: "stat-n5", end: 42, decimals: 0, suffix: "", duration: 1400 }
   ];
 
   function formatNum(val, decimals) {
